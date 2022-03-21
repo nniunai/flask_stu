@@ -1,8 +1,9 @@
-from flask import Flask,jsonify,url_for
+from flask import Flask,jsonify,url_for,redirect,request
 import config
 
 
 app = Flask(__name__)
+
 # 加载外部配置项
 app.config.from_object(config)
 
@@ -35,10 +36,20 @@ def book_list():
 
 
 @app.route('/')
-def hello_world():
+def index():
     # return 'Hello 你好啦风格恢复啦啦!'
     # return {"name":"你好 世界"}
     return jsonify(books)
+
+
+@app.route("/profile")
+def profile():
+
+    user_id =request.args.get("id")
+    if user_id:
+        return "用户个人中心"
+    else:
+        return redirect(url_for("index"))
 
 
 
