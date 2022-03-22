@@ -1,4 +1,4 @@
-from flask import Flask,jsonify,url_for,redirect,request
+from flask import Flask,jsonify,url_for,redirect,request,render_template
 import config
 
 
@@ -50,6 +50,32 @@ def profile():
         return "用户个人中心"
     else:
         return redirect(url_for("index"))
+
+
+
+@app.route("/about")
+def about():
+
+    contest ={"username":"数据库的数据"}
+    return render_template("about.html",**contest)
+
+
+
+
+
+@app.route("/control")
+def control():
+
+    context = {
+        "age" : 18,
+        "books" : ["红楼梦",'西游记','水浒传','三国演绎'],
+        "person":{"name":"小明","age":23}
+
+    }
+
+    return render_template("control.html",**context)
+
+
 
 
 
